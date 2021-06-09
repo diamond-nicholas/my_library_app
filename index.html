@@ -10,7 +10,7 @@
 <body>
     <div class="container">Nich Book App</div>
 
-    <form action="">
+    <form action="" id="book-form">
         <label for="title">Title:</label><br>
         <input type="text" id="title"><br>
         <label for="author">Author:</label><br>
@@ -21,6 +21,16 @@
         <input type="radio" id="read"><br>
         <button class="submit">Add book to library</button>
     </form>
+    <table>
+        <thead>
+            <tr>Title</tr>
+            <tr>Author</tr>
+            <tr>Pages</tr>
+            <tr>Read?</tr>
+            <tr></tr>
+        </thead>
+        <tbody id="book-list"></tbody>
+    </table>
 
     <script src="./main.js"></script>
 </body>
