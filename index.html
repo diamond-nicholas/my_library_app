@@ -18,8 +18,16 @@
         <label for="pages">Pages:</label><br>
         <input type="number" id="pages"><br>
         <label for="read">Read this book?:</label><br>
-        <input type="radio" id="read"><br>
+        <input type="text" id="read"><br>
         <button class="submit">Add book to library</button>
+
+
+        <div id="msg">
+            <pre></pre>
+        </div> 
+        <div class="store">
+            <article></article>
+        </div>   
     </form>
     <table>
         <thead>
@@ -31,7 +39,7 @@
         </thead>
         <tbody id="book-list"></tbody>
     </table>
-
+   
     <script src="./main.js"></script>
 </body>
 </html>
