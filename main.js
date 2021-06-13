@@ -62,8 +62,9 @@ function clearFields() {
     document.querySelector('#read').value = '';
 }
 
-// Events: display books
+// storage
 
+// Events: display books
 document.addEventListener('DOMContentLoaded', displayBooks);
 
 
@@ -78,13 +79,18 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
     const pages = document.querySelector('#pages').value;
     const read = document.querySelector('#read').value;
 
-    //instantiate a book
-    const book = new Book(title, author, pages, read);
-    // add book to list
-    addBookToList(book);
+    //validate
+    if(title === '' || author === '' || pages === '' || read === '') {
+        alert('please fill in all fields');
+    } else {
+        //instantiate a book
+        const book = new Book(title, author, pages, read);
+        // add book to list
+        addBookToList(book);
+        // clear form field
+        clearFields();
+    }
 
-    // clear form field
-    clearFields();
 
 });
 
@@ -93,80 +99,3 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 document.querySelector('#book-list').addEventListener('click', (e) => {
     deleteBook(e.target);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//add book to library
-// const usersData = function addBookToLibrary(e) {
-//     e.preventDefault(); //prevents the forms normal behaviour from submitting
-//     let data = {
-//         formTitle: document.querySelector('#title').value,
-//         formAuthor: document.querySelector('#author').value,
-//         formPages: document.querySelector('#pages').value,
-//         formRead: document.querySelector('#read').value
-//     }
-//     myLibrary.push(data);
-//     const formData = document.querySelector('#book-form');
-//     // formData.reset(); //resets the form value 
-
-//     console.log('added', {myLibrary});
-//     console.log(Object.values(myLibrary));
-//     console.log(myLibrary[0].formTitle);
-
-
-    //append to html
-//     const newBook = document.querySelector('#msg pre')
-//     newBook.textContent = '\n' + JSON.stringify(Object.values(myLibrary), '\t', 2)
-
-
-//     //saving to local storage
-//     function getBooks() {
-//         let books;
-//         if(localStorage.getItem('books') === null) {
-//             books = []
-//         } else {
-//             boooks = JSON.parse(localStorage.getItem(books));
-//         }
-
-//         return books;
-//     }
-
-//     //add to local storage
-//     function addBook(book) {
-//         const books = getBooks();
-//         books.push(book);
-//         localStorage.setItem('books', JSON.stringify(myLibrary))
-//     }
-
-
-//     // let storedData = JSON.parse);
-//     // console.log(storedData);
-
-
-//     //
-//     const show = document.querySelector('.store article');
-//     show.textContent = storedData;
-// }
-
-// document.addEventListener('DOMContentLoaded', () =>{
-//     document.querySelector('.submit').addEventListener('click', usersData);
-// });
