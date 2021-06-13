@@ -46,6 +46,12 @@ function addBookToList(book) {
 
     list.appendChild(row)
 };
+//this deletes a book
+function deleteBook(ele) {
+    if(ele.classList.contains('delete')) {
+        ele.parentElement.parentElement.remove();
+    }
+};
 
 // this clears the form field
 
@@ -80,6 +86,12 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
     // clear form field
     clearFields();
 
+});
+
+//Event: remove a book
+
+document.querySelector('#book-list').addEventListener('click', (e) => {
+    deleteBook(e.target);
 });
 
 
