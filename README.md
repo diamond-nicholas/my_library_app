@@ -29,12 +29,18 @@ To get a local copy up and running follow these simple example steps.
 You can download the code to your personal computer clonig the repository using the following command
 
 ```
-git clone
+git clone https://github.com/diamond-nicholas/my_library_app.git
+
 ```
+You will also have to checkout to the library branch and use the command 'git pull' to get the lastest code.
+
+You also need to use the command 'npm install' to install all packages from the project.
 
 ### Usage
 
-To run this project you only need to open the index.html file in a web browser
+To run this project you only need to open the index.html file from the folder in which it was saved on your computer in a web browser
+
+You can also start the project on vscode by opening with live server. You can install live server from the extension section on your vscode.
 
 
 
