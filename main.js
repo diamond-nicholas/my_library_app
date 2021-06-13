@@ -47,6 +47,15 @@ function addBookToList(book) {
     list.appendChild(row)
 };
 
+// this clears the form field
+
+function clearFields() {
+    document.querySelector('#title').value = '';
+    document.querySelector('#author').value = '';
+    document.querySelector('#pages').value = '';
+    document.querySelector('#read').value = '';
+}
+
 // Events: display books
 
 document.addEventListener('DOMContentLoaded', displayBooks);
@@ -67,6 +76,9 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
     const book = new Book(title, author, pages, read);
     // add book to list
     addBookToList(book);
+
+    // clear form field
+    clearFields();
 
 });
 
