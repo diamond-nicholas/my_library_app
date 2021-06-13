@@ -1,5 +1,3 @@
-let myLibrary = [];
-
 // book constructor
 function Book(title, author, pages, read) {
     this.title = title
