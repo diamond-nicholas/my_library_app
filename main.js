@@ -10,21 +10,7 @@ function Book(title, author, pages, read) {
 
 // handles task
 function displayBooks() {
-    const StoredBoooks = [
-       {
-        title: 'book one',
-        author: 'nicholas',
-        pages: 59,
-        read: true
-       },
-       {
-        title: 'book two',
-        author: 'diamond',
-        pages: 80,
-        read: false
-       }
-    ];
-    const books = StoredBoooks;
+    const books = getBook();
 
 
     //loop through the books
@@ -63,6 +49,32 @@ function clearFields() {
 }
 
 // storage
+function getBook() {
+    let books;
+    if(localStorage.getItem('books') === null) {
+        books = [];
+    } else {
+        books = JSON.parse(localStorage.getItem('books'));
+    }
+
+    return books;
+};
+
+function addBook(book) {
+    const books = getBook();
+    books.push(book);
+    localStorage.setItem('books', JSON.stringify(books));
+};
+
+function removeBook(title) {
+    const books = getBook();
+    books.forEach((book, index) => {
+        if(book.title === title) {
+            books.splice(index, 1);
+        }
+    });
+    localStorage.setItem('books', JSON.stringify(books));
+};
 
 // Events: display books
 document.addEventListener('DOMContentLoaded', displayBooks);
@@ -87,6 +99,10 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
         const book = new Book(title, author, pages, read);
         // add book to list
         addBookToList(book);
+
+        //add book to store
+        addBook(book);
+
         // clear form field
         clearFields();
     }
@@ -97,5 +113,9 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 //Event: remove a book
 
 document.querySelector('#book-list').addEventListener('click', (e) => {
+    //remove book from page
     deleteBook(e.target);
+
+    //remove book from store
+    removeBook(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
 });
