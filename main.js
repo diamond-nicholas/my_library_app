@@ -6,45 +6,6 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-// handles task
-function displayBooks() {
-  const books = getBook();
-
-  // loop through the books
-
-  books.forEach((book) => addBookToList(book));
-}
-
-function addBookToList(book) {
-  const list = document.querySelector('#book-list');
-
-  const row = document.createElement('tr');
-  row.innerHTML = `
-    <td>${book.title}</td>
-    <td>${book.author}</td>
-    <td>${book.pages}</td>
-    <td>${book.read}</td>
-    <td><a href="#" class="delete">X</a></td>
-    `;
-
-  list.appendChild(row);
-}
-// this deletes a book
-function deleteBook(ele) {
-  if (ele.classList.contains('delete')) {
-    ele.parentElement.parentElement.remove();
-  }
-}
-
-// this clears the form field
-
-function clearFields() {
-  document.querySelector('#title').value = '';
-  document.querySelector('#author').value = '';
-  document.querySelector('#pages').value = '';
-  document.querySelector('#read').value = '';
-}
-
 // storage
 function getBook() {
   let books;
@@ -71,6 +32,45 @@ function removeBook(title) {
     }
   });
   localStorage.setItem('books', JSON.stringify(books));
+}
+
+function addBookToList(book) {
+  const list = document.querySelector('#book-list');
+
+  const row = document.createElement('tr');
+  row.innerHTML = `
+    <td>${book.title}</td>
+    <td>${book.author}</td>
+    <td>${book.pages}</td>
+    <td>${book.read}</td>
+    <td><a href="#" class="delete">X</a></td>
+    `;
+
+  list.appendChild(row);
+}
+
+// handles task
+function displayBooks() {
+  const books = getBook();
+
+  // loop through the books
+
+  books.forEach((book) => addBookToList(book));
+}
+// this deletes a book
+function deleteBook(ele) {
+  if (ele.classList.contains('delete')) {
+    ele.parentElement.parentElement.remove();
+  }
+}
+
+// this clears the form field
+
+function clearFields() {
+  document.querySelector('#title').value = '';
+  document.querySelector('#author').value = '';
+  document.querySelector('#pages').value = '';
+  document.querySelector('#read').value = '';
 }
 
 // Events: display books
@@ -111,5 +111,5 @@ document.querySelector('#book-list').addEventListener('click', (e) => {
   deleteBook(e.target);
 
   // remove book from store
-  removeBook(e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
+  removeBook(e.target.parentElement.previousElementSibling.textContent);
 });
