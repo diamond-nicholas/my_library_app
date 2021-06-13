@@ -17,7 +17,7 @@
 
 ## Live Demo
 
-[Live Demo Link](https://diamond-nicholas.github.io/my_library_app/)
+[Live Demo Link](https://my-library-app-murex.vercel.app/)
 
 ## Getting Started
 
