@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/extensions
+import { addBookToList, clearFields } from './dom.js';
+
 // book constructor
 function Book(title, author, pages, read) {
   this.title = title;
@@ -34,21 +37,6 @@ function removeBook(title) {
   localStorage.setItem('books', JSON.stringify(books));
 }
 
-function addBookToList(book) {
-  const list = document.querySelector('#book-list');
-
-  const row = document.createElement('tr');
-  row.innerHTML = `
-    <td>${book.title}</td>
-    <td>${book.author}</td>
-    <td>${book.pages}</td>
-    <td>${book.read}</td>
-    <td><a href="#" class="delete">X</a></td>
-    `;
-
-  list.appendChild(row);
-}
-
 // handles task
 function displayBooks() {
   const books = getBook();
@@ -64,19 +52,9 @@ function deleteBook(ele) {
   }
 }
 
-// this clears the form field
-
-function clearFields() {
-  document.querySelector('#title').value = '';
-  document.querySelector('#author').value = '';
-  document.querySelector('#pages').value = '';
-  document.querySelector('#read').value = '';
-}
-
 // Events: display books
 document.addEventListener('DOMContentLoaded', displayBooks);
 
-// Event: add a book
 document.querySelector('#book-form').addEventListener('submit', (e) => {
   // prevent default
   e.preventDefault();
@@ -87,21 +65,19 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
   const pages = document.querySelector('#pages').value;
   const read = document.querySelector('#read').value;
 
-  // validate
-  if (title === '' || author === '' || pages === '' || read === '') {
-    alert('please fill in all fields');
-  } else {
-    // instantiate a book
-    const book = new Book(title, author, pages, read);
-    // add book to list
-    addBookToList(book);
+  // instantiate a book
+  const book = new Book(title, author, pages, read);
 
-    // add book to store
-    addBook(book);
+  console.log(read);
+  // console.log(book);
+  // add book to list
+  addBookToList(book);
 
-    // clear form field
-    clearFields();
-  }
+  // add book to store
+  addBook(book);
+
+  // clear form field
+  clearFields();
 });
 
 // Event: remove a book
@@ -109,7 +85,6 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 document.querySelector('#book-list').addEventListener('click', (e) => {
   // remove book from page
   deleteBook(e.target);
-
   // remove book from store
-  removeBook(e.target.parentElement.previousElementSibling.textContent);
+  removeBook(e.target.parentElement.previousElementSibling.parentElementSibling.parentElementSiblingtextContent);
 });
