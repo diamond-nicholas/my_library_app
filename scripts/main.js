@@ -64,11 +64,9 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
   const author = document.querySelector('#author').value;
   const pages = document.querySelector('#pages').value;
   const read = document.querySelector('#read').value;
-
   // instantiate a book
   const book = new Book(title, author, pages, read);
 
-  console.log(read);
   // console.log(book);
   // add book to list
   addBookToList(book);
