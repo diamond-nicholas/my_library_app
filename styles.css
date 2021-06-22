@@ -1,14 +1,5 @@
-* {
-  margin: 0.5rem;
-}
-
-table {
-  border: 1px solid black;
-}
-
-table,
-th,
-td {
-  border: 1px solid black;
-  border-collapse: collapse;
+.book-item {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
 }

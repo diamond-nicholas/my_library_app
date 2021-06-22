@@ -1,88 +1,105 @@
-// eslint-disable-next-line import/extensions
-import { addBookToList, clearFields } from './dom.js';
+/* eslint-disable max-len */
+const alert = document.querySelector('.alert');
+const form = document.querySelector('#book-form');
+const mainTitle = document.querySelector('#title');
+const mainAuthor = document.querySelector('#author');
+const mainPages = document.querySelector('#pages');
+const mainRead = document.querySelector('#read');
+const submitBtn = document.querySelector('.submit');
 
-// book constructor
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+// const container = document.querySelector('.book-container');
+const bookList = document.querySelector('.book-list');
+
+let editElement;
+let editElementTitle;
+let editElementAuthor;
+let editElementPages;
+let editFlag = false;
+// let editID = '';
+
+function setBackToDefault() {
+  mainTitle.value = '';
+  mainAuthor.value = '';
+  mainPages.value = '';
+  mainRead.value = '';
+  editFlag = false;
+  // editID = '';
+  submitBtn.textContent = 'submit';
 }
 
-// storage
-function getBook() {
-  let books;
-  if (localStorage.getItem('books') === null) {
-    books = [];
-  } else {
-    books = JSON.parse(localStorage.getItem('books'));
-  }
-
-  return books;
+function displayAlert(text, action) {
+  alert.textContent = text;
+  alert.style.color = action;
+  setTimeout(() => {
+    alert.textContent = '';
+    alert.style.color = '';
+  }, 2000);
 }
 
-function addBook(book) {
-  const books = getBook();
-  books.push(book);
-  localStorage.setItem('books', JSON.stringify(books));
+function deleteItem(e) {
+  const element = e.currentTarget.parentElement;
+  // const id = element.dataset;
+  bookList.removeChild(element);
+  displayAlert('item removed', 'red');
+  setBackToDefault();
 }
 
-function removeBook(title) {
-  const books = getBook();
-  books.forEach((book, index) => {
-    if (book.title === title) {
-      books.splice(index, 1);
-    }
-  });
-  localStorage.setItem('books', JSON.stringify(books));
+function editItem(e) {
+  // eslint-disable-next-line no-unused-vars
+  const element = e.currentTarget.parentElement.parentElement;
+  // set edit item
+  editElement = e.currentTarget.parentElement;
+  editElementTitle = e.currentTarget.parentElement.previousElementSibling.previousElementSibling.previousElementSibling;
+
+  editElementAuthor = e.currentTarget.parentElement.previousElementSibling.previousElementSibling;
+
+  editElementPages = e.currentTarget.parentElement.previousElementSibling;
+  // set form value
+  mainRead.value = editElement.textContent;
+  mainTitle.value = editElementTitle.textContent;
+  mainAuthor.value = editElementAuthor.textContent;
+  mainPages.value = editElementPages.textContent;
+  editFlag = true;
+  // editID = element.dataset.id;
+  submitBtn.textContent = 'edit';
 }
 
-// handles task
-function displayBooks() {
-  const books = getBook();
-
-  // loop through the books
-
-  books.forEach((book) => addBookToList(book));
-}
-// this deletes a book
-function deleteBook(ele) {
-  if (ele.classList.contains('delete')) {
-    ele.parentElement.parentElement.remove();
-  }
-}
-
-// Events: display books
-document.addEventListener('DOMContentLoaded', displayBooks);
-
-document.querySelector('#book-form').addEventListener('submit', (e) => {
-  // prevent default
+function addItem(e) {
   e.preventDefault();
+  const valueTitle = mainTitle.value;
+  const valueAuthor = mainAuthor.value;
+  const valuePages = mainPages.value;
+  const valueRead = mainRead.value;
+  const id = new Date().getTime().toString();
+  if (valueTitle && valueAuthor && valuePages && valueRead && !editFlag) {
+    const element = document.createElement('article');
+    element.classList.add('book-item');
+    const attr = document.createAttribute('data-id');
+    attr.value = id;
+    element.setAttributeNode(attr);
+    element.innerHTML = `<div class="titleValue">${valueTitle}</div>
+                <div class="authorValue">${valueAuthor}</div>
+                <div class="pagesValue">${valuePages}</div>
+                <div class="readStatus">${valueRead}<button type="button" class="edit-btn">
+                  <i class="far fa-edit"></i>
+                </button></div>
+                <button type="button" class="delete-btn">
+                  <i class="far fa-trash"></i>
+                </button>`;
+    const deleteBtn = element.querySelector('.delete-btn');
+    const editBtn = element.querySelector('.edit-btn');
+    deleteBtn.addEventListener('click', deleteItem);
+    editBtn.addEventListener('click', editItem);
+    bookList.appendChild(element);
+    displayAlert('succesfully added', 'green');
+    setBackToDefault();
+  } else if (valueTitle && valueAuthor && valuePages && valueRead && editFlag) {
+    editElement.innerHTML = valueRead;
+    displayAlert('succesfully edited', 'green');
+    setBackToDefault();
+  } else {
+    displayAlert('please fill the form', 'red');
+  }
+}
 
-  // gets the value
-  const title = document.querySelector('#title').value;
-  const author = document.querySelector('#author').value;
-  const pages = document.querySelector('#pages').value;
-  const read = document.querySelector('#read').value;
-  // instantiate a book
-  const book = new Book(title, author, pages, read);
-
-  // console.log(book);
-  // add book to list
-  addBookToList(book);
-
-  // add book to store
-  addBook(book);
-
-  // clear form field
-  clearFields();
-});
-
-// Event: remove a book
-
-document.querySelector('#book-list').addEventListener('click', (e) => {
-  // remove book from page
-  deleteBook(e.target);
-  // remove book from store
-  removeBook(e.target.parentElement.previousElementSibling.parentElementSibling.parentElementSiblingtextContent);
-});
+form.addEventListener('submit', addItem);
