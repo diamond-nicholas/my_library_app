@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <title>my_library_app</title>
+</head>
+<body>
+    <div class="container">Nich Book App</div>
+    <p class="alert"></p>
+    <form action="" id="book-form">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title"><br>
+        <label for="author">Author:</label><br>
+        <input type="text" id="author"><br>
+        <label for="pages">Pages:</label><br>
+        <input type="number" id="pages"><br>
+        <label for="read">Read this book?:</label><br>
+        <input type="text" id="read" placeholder="true/false"><br>
+            <br>
+        <!-- <div class="check">
+            <input type="checkbox" id="read">
+            <label class="form-check-label" for="checkRead">Read this book???</label>
+        </div> -->
+        <button class="submit">Add book to library</button>
+    </form>
+    <article class="book-container">
+        <div class="book-list">
+        </div>
+    </article>
+   
+    <script type="module" src="./scripts/main.js"></script>
+</body>
+</html>
