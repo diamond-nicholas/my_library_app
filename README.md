@@ -17,7 +17,7 @@
 
 ## Live Demo
 
-[Live Demo Link](https://my-library-app-82v6sha73-diamond-nicholas.vercel.app/)
+[Live Demo Link](https://my-library-app-6wsen37ck-diamond-nicholas.vercel.app/)
 
 ## Getting Started
 
