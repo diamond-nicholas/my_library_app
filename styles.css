@@ -1,5 +1,6 @@
 *,
-*:before, *:after {
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -79,7 +80,7 @@ input[name='pages'] {
 }
 
 .hidden {
-transform: translateY(-400px);
+  transform: translateY(-400px);
 }
 
 .checkbox-container {
@@ -90,7 +91,9 @@ transform: translateY(-400px);
   border: 1px solid #a4a4a4;
 }
 
-table, th, td {
+table,
+th,
+td {
   border-collapse: collapse;
 }
 
@@ -98,7 +101,8 @@ table {
   width: 100%;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #cecece;
   padding: 15px;
 }
