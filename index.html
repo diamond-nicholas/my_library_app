@@ -1,37 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <title>my_library_app</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>Library</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Antic+Slab&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+
 <body>
-    <div class="container">Nich Book App</div>
-    <p class="alert"></p>
-    <form action="" id="book-form">
-        <label for="title">Title:</label><br>
-        <input type="text" id="title"><br>
-        <label for="author">Author:</label><br>
-        <input type="text" id="author"><br>
-        <label for="pages">Pages:</label><br>
-        <input type="number" id="pages"><br>
-        <label for="read">Read this book?:</label><br>
-        <input type="text" id="read" placeholder="true/false"><br>
-            <br>
-        <!-- <div class="check">
-            <input type="checkbox" id="read">
-            <label class="form-check-label" for="checkRead">Read this book???</label>
-        </div> -->
-        <button class="submit">Add book to library</button>
+  <div class='wrapper'>
+    <h1>Library App</h1>
+
+    <form class='new-book-form hidden'>
+      <input type='text' name='title' placeholder='Title' required>
+      <input type='text' name='author' placeholder='Author' required>
+      <input type='number' name='pages' placeholder='Pages'>
+      <div class='checkbox-container'>
+        <label for='read'>Read?</label>
+        <input type='checkbox' name='read'>
+      </div>
+      <input type='submit' value='+ Add Book'>
     </form>
-    <article class="book-container">
-        <div class="book-list">
-        </div>
-    </article>
-   
-    <script type="module" src="./scripts/main.js"></script>
+
+    <button class='add-book'>Add Book</button>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Pages</th>
+          <th>Read?</th>
+          <th></th>
+        </tr>
+      </thead>
+  
+      <tbody class='library-items'>
+        <td>Loading...</td>
+      </tbody>
+    </table>
+  </div>
+
+  <script type='text/javascript' src='./scripts/main.js'></script>
 </body>
 </html>
